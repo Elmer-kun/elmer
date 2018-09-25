@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Boring</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+</head>
+<body>
+<div style="padding-top:10%">
+	<form class="bs-example bs-example-form" role="form" action="/textsubmit" method="post">
+        {% csrf_token %}
+		<div class="row">
+			<div class="col-lg-6 container">
+				<div class="input-group ">
+					<input type="text" class="form-control" id="textinput" name="textinput">
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="submit">
+							bored
+						</button>
+					</span>
+				</div><!-- /input-group -->
+			</div><!-- /.col-lg-6 -->
+		</div><!-- /.row -->
+	</form>
+    <div class="col-lg-6 container">
+
+        {% for his in hisinput  %}
+            <p>{{ his }}</p>
+        {% endfor %}
+{#        <div align="center">{{ hisinput }}</div>#}
+    </div>
+</div>
+</body>
+</html>
