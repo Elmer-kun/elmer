@@ -41,3 +41,23 @@ class textLinkUser(models.Model):
 
     def __unicode__(self):
         return self.text
+
+
+# 提交的内容和心情关联起来,测试数据
+class textLinkMood(models.Model):
+    mood = models.CharField(max_length=50)
+    text = models.CharField(max_length=150)
+    createDate = models.DateTimeField(default=timezone.now)
+
+    def __unicode__(self):
+        return self.text
+
+
+# 提交的内容和心情关联起来,测试数据
+class textLinkKiding(models.Model):
+    mood = models.CharField(max_length=50)
+    text = models.CharField(max_length=150)
+    createDate = models.DateTimeField(default=timezone.now)
+
+    def __unicode__(self):
+        return self.text

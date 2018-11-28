@@ -22,3 +22,4 @@ def hisGetByUser(usrid):
     for his in hislist:
         response_str.append(his.text)
     return response_str
+

@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
 </head>
 <body>
+<div  style="height: 600px">
 <div style="padding-top:10%">
 	<form class="bs-example bs-example-form" role="form" action="/textsubmit" method="post">
         {% csrf_token %}
@@ -23,12 +24,16 @@
 		</div><!-- /.row -->
 	</form>
     <div class="col-lg-6 container">
-
+      <p> 您今天心情：{{ mood }}</p>
+    </div>
+    <div class="col-lg-6 container">
         {% for his in hisinput  %}
             <p>{{ his }}</p>
         {% endfor %}
 {#        <div align="center">{{ hisinput }}</div>#}
     </div>
 </div>
+</div>
+<div align="center" style="font-size: 10px;">@2018 boredno 冀ICP备18030797号</div>
 </body>
 </html>
