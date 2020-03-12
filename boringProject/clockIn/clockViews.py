@@ -7,7 +7,9 @@ import json
 
 @csrf_exempt
 def opt_clock(req):
+    texts = {}
     if req.POST:
+        print(req.POST)
         opt = req.POST['opt']
         if opt == 'se':
             texts = search_clock_text(req.POST['uid'])
@@ -24,6 +26,7 @@ def opt_clock(req):
 
 @csrf_exempt
 def clock_info(req):
+    texts = {}
     if req.POST:
         opt = req.POST['opt']
         if opt == 'add':
@@ -53,22 +56,20 @@ def search_clock_info(u_id):
 
 
 def add_clock_text(req):
-    if req.POST:
-        user_id = req.POST['uid']
-        usr_name = req.POST['name']
-        text_info = req.POST['text']
-        user_input = models.ClockText(clockInfo=text_info, userid=user_id, username=usr_name, )
-        user_input.save()
+    user_id = req.POST['uid']
+    usr_name = req.POST['name']
+    text_info = req.POST['text']
+    user_input = models.ClockText(clockInfo=text_info, userid=user_id, username=usr_name, )
+    user_input.save()
     texts = {'text': 'ok'}
     return json.dumps(texts)
 
 
 def del_clock_text(req):
-    if req.POST:
-        user_id = req.POST['uid']
-        text_info = req.POST['text']
-        user_input = models.ClockText.objects.filter(clockInfo=text_info, userid=user_id, )
-        user_input.delete()
+    user_id = req.POST['uid']
+    text_info = req.POST['text']
+    user_input = models.ClockText.objects.filter(clockInfo=text_info, userid=user_id, )
+    user_input.delete()
     texts = {'text': 'ok'}
     return json.dumps(texts)
 
