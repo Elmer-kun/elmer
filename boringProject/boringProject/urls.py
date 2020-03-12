@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from testModel import models, views, testdb, search, search2
 from boring import views
 from moodLearning import moodout
+from clockIn import clockViews
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -30,6 +31,8 @@ urlpatterns = [
     url(r'^collectmood', views.dealSmallProgramDataCollect),
     url(r'^getSentence', views.getSomeSentence),
     url(r'^getOpenid', views.getOpenUserid),
+    url(r'^optClock', clockViews.opt_clock),
+    url(r'^clockInfo', clockViews.clock_info),
     # url(r'^testdb', testdb.testdb, name="testdb"),
     # url(r'^search-form', search.search_form),
     # url(r'^search-post$', search2.search_post),

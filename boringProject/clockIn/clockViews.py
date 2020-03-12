@@ -40,7 +40,7 @@ def add_clock_info(req):
     user_id = req.POST['uid']
     usr_name = req.POST['name']
     text_info = req.POST['text']
-    info = models.UserClockInfo(clockInfo=text_info, userid=user_id, username=usr_name, clockLen=c_len,)
+    info = models.UserClockInfo(clockInfo=text_info, userid=user_id, username=usr_name, clockLen=c_len, )
     info.save()
     texts = {'text': 'ok'}
     return HttpResponse(texts)
