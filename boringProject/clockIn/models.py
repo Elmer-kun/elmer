@@ -17,8 +17,8 @@ class UserClockInfo(models.Model):
     userId = models.CharField(max_length=50)
     username = models.CharField(max_length=50)
     clockInfo = models.CharField(max_length=200)
-    startTime = models.DateTimeField(default=timezone.now())
-    endTime = models.DateTimeField(default=timezone.now())
+    startTime = models.DateTimeField(default=timezone.now)
+    endTime = models.DateTimeField(default=timezone.now)
     clockLen = models.IntegerField(default=0)
 
     def __unicode__(self):
