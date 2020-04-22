@@ -51,7 +51,7 @@ def add_clock_info(req):
 
 def search_clock_info(u_id):
     infos = []
-    hisinfo = models.UserClockInfo.objects.filter(userId=u_id,).order_by('endTime')[0:7]
+    hisinfo = models.UserClockInfo.objects.filter(userId=u_id,).order_by('-endTime')
     for info in hisinfo:
         inn = {'title': info.clockInfo, 'date': info.endTime, 'len': info.clockLen}
         infos.append(inn)
