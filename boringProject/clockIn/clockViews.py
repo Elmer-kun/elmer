@@ -1,9 +1,11 @@
 from __future__ import unicode_literals
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import HttpResponse
+from django.db.models import Sum
 from . import models
 import json
 import datetime
+# uid=odVNV425yvKRwX3EeUKwfIwfQS4A
 
 
 @csrf_exempt
@@ -33,6 +35,26 @@ def clock_info(req):
             texts = add_clock_info(req)
         else:
             texts = search_clock_info(req.POST['uid'])
+    if not texts:
+        texts = {'text': 'n'}
+    return HttpResponse(texts)
+
+
+@csrf_exempt
+def clock_collect(req):
+    texts = {}
+    if req.POST:
+        texts = get_usr_clock_collect(req.POST['uid'])
+    if not texts:
+        texts = {'text': 'n'}
+    return HttpResponse(texts)
+
+
+@csrf_exempt
+def clock_limit(req):
+    texts = {}
+    if req.POST:
+        texts = search_clock_by_len(req.POST['uid'], req.POST['len'])
     if not texts:
         texts = {'text': 'n'}
     return HttpResponse(texts)
@@ -99,6 +121,26 @@ def search_clock_text(u_id):
                 info_ids.append(usr.id)
                 response_str.append(usr.clockInfo)
     texts = {'text': response_str, 'ids': info_ids}
+    return json.dumps(texts)
+
+
+def search_clock_by_len(u_id, u_len):
+    infos = []
+    hisinfo = models.UserClockInfo.objects.filter(userId=u_id,).order_by('-endTime')[0: u_len]
+    for info in hisinfo:
+        inn = {'title': info.clockInfo, 'date': info.endTime, 'len': info.clockLen}
+        infos.append(inn)
+    texts = {'text': infos}
+    return json.dumps(texts, cls=DateEncoder)
+
+
+def get_usr_clock_collect(u_id):
+    infos = []
+    hisinfo = models.UserClockInfo.objects.filter(userId=u_id).values('clockInfo').annotate(cLen=Sum('clockLen'))
+    for info in hisinfo:
+        inn = {'title': info['clockInfo'], 'len': info['cLen']}
+        infos.append(inn)
+    texts = {'text': infos}
     return json.dumps(texts)
 
 

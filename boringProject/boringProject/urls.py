@@ -33,6 +33,8 @@ urlpatterns = [
     url(r'^getOpenid', views.getOpenUserid),
     url(r'^optClock', clockViews.opt_clock),
     url(r'^clockInfo', clockViews.clock_info),
+    url(r'^clockCollect', clockViews.clock_collect),
+    url(r'^clockLimit', clockViews.clock_limit),
     # url(r'^testdb', testdb.testdb, name="testdb"),
     # url(r'^search-form', search.search_form),
     # url(r'^search-post$', search2.search_post),
